@@ -18,7 +18,13 @@ import { PaginationComponent } from '../pagination/paginationComponent';
 import { usePagination } from '../../hooks/usePagination';
 
 export const MembersTableComponent: React.FC = () => {
-  const { loadMembers, onChange, members, organizationName } = useLoadMembers();
+  const {
+    loadMembers,
+    onChange,
+    members,
+    organizationName,
+    error,
+  } = useLoadMembers();
   const {
     currentMembers,
     currentPage,
@@ -65,8 +71,8 @@ export const MembersTableComponent: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {!members.length && (
-        <Typography color='error'>No members found</Typography>
+      {(!members.length || error) && (
+        <Typography color='error'>Sorry, no members found!</Typography>
       )}
     </Container>
   );
